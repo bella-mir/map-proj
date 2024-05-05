@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="language" content="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Map Projections</title>
+    <link rel="stylesheet" href="index.css" />
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-array@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-geo@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-geo-projection@4"></script>
+  </head>
+
+  <body class="root">
+    <div class="page">
+      <div class="header__wrapper">
+        <header class="header">
+          <a href="index.html" class="header__logo"></a>
+          <nav class="header__nav">
+            <ul class="header__list">
+              <li><a href="index.html" class="header__current">Home</a></li>
+              <li><a href="learn.html">Learn</a></li>
+              <li><a href="quiz.html">Quiz</a></li>
+              <li><a href="map.html">Bonne</a></li>
+              <li><a href="about.html">About</a></li>
+            </ul>
+          </nav>
+        </header>
+      </div>
+
+      <main class="page__content">
+        <section class="section__block">
+          <h1 class="lead__title">Map Projections</h1>
+          <p class="lead__subtitle">To choose or not to choose?</p>
+          <div id="grid"></div>
+          <p class="lead__caption">Which one will you choose?</p>
+        </section>
+
+        <section class="section__block">
+          <span class="section__title"
+            >Why do we need to care about map projections?</span
+          >
+          <p class="section__text">
+            Map projections are crucial elements in cartography, offering
+            various ways to represent the Earth's curved surface on a flat map.
+            The choice of projection can significantly impact the accuracy and
+            visual appearance of a map. Every cartographer has to thoroughly
+            study the theory and understand the principles of various map
+            projections.
+          </p>
+        </section>
+
+        <section class="section__block">
+          <span class="section__title">Learn more about map projections</span>
+          <p class="section__text">
+            <span
+              >There are millions of cartographic projections made for different
+              purposes. Some of them are designed to display the entire world,
+              while others are created and optimized for small parts of the
+              Earth.</span
+            >
+            <span
+              >Explore different world projections
+              <a href="learn.html">here</a>!</span
+            >
+          </p>
+        </section>
+
+        <section class="section__block">
+          <span class="section__title"
+            >Play with map projections before they play with you!</span
+          >
+          <a href="quiz.html" class="play__quiz">Quiz</a>
+        </section>
+      </main>
+      <footer class="footer__wrapper">
+        <div class="footer">
+          <p class="footer__copyright">&copy;2024.Bella Mironova</p>
+        </div>
+      </footer>
+    </div>
+    <script>
+      const dataUrl =
+        "https://gist.githubusercontent.com/d3indepth/f28e1c3a99ea6d84986f35ac8646fac7/raw/c58cede8dab4673c91a3db702d50f7447b373d98/ne_110m_land.json";
+
+      const getRandomProjections = (count) => {
+        const allProjections = [
+          {
+            name: "Azimuthal Equal Area",
+            projection: d3
+              .geoAzimuthalEqualArea()
+              .scale(50)
+              .translate([175, 100]),
+          },
+          {
+            name: "Orthographic",
+            projection: d3.geoOrthographic().scale(100).translate([175, 100]),
+          },
+          {
+            name: "Equal Earth",
+            projection: d3.geoEqualEarth().scale(60).translate([175, 100]),
+          },
+          {
+            name: "Equirectangular",
+            projection: d3.geoEquirectangular().scale(50).translate([175, 100]),
+          },
+          {
+            name: "Conic Equal Area",
+            projection: d3.geoConicEqualArea().scale(50).translate([175, 100]),
+          },
+          {
+            name: "Eckert I",
+            projection: d3.geoEckert1().scale(60).translate([175, 100]),
+          },
+          {
+            name: "Hill",
+            projection: d3.geoHill().scale(60).translate([175, 100]),
+          },
+          {
+            name: "Interrupted Mollweide",
+            projection: d3
+              .geoInterruptedMollweide()
+              .scale(60)
+              .translate([175, 100]),
+          },
+          {
+            name: "Interrupted SinuMollweide",
+            projection: d3
+              .geoInterruptedSinuMollweide()
+              .scale(50)
+              .translate([175, 100]),
+          },
+          {
+            name: "Interrupted Sinusoidal",
+            projection: d3
+              .geoInterruptedSinusoidal()
+              .scale(50)
+              .translate([175, 100]),
+          },
+          {
+            name: "Patterson",
+            projection: d3.geoPatterson().scale(50).translate([175, 100]),
+          },
+          {
+            name: "Wagner",
+            projection: d3.geoWagner().scale(60).translate([175, 100]),
+          },
+          {
+            name: "Van Der Grinten",
+            projection: d3.geoVanDerGrinten().scale(30).translate([175, 100]),
+          },
+          {
+            name: "Baker",
+            projection: d3.geoBaker().scale(40).translate([175, 100]),
+          },
+          {
+            name: "Bonne",
+            projection: d3.geoBonne().scale(40).translate([175, 100]),
+          },
+        ];
+        return d3.shuffle(allProjections).slice(0, count);
+      };
+
+      const createMap = (projection, svg, name) => {
+        const path = d3.geoPath().projection(projection);
+
+        d3.json(dataUrl)
+          .then((data) => {
+            const clipPathId = `clip-${name.replace(/\s+/g, "-")}`;
+            svg
+              .append("clipPath")
+              .attr("id", clipPathId)
+              .append("path")
+              .attr("d", path({ type: "Sphere" }));
+
+            const graticule = d3.geoGraticule();
+
+            svg
+              .append("rect")
+              .attr("x", 0)
+              .attr("y", 0)
+              .attr("width", 350)
+              .attr("height", 200)
+              .attr("class", "water")
+              .attr("clip-path", `url(#${clipPathId})`);
+
+            svg
+              .selectAll("path.land")
+              .data(data.features)
+              .enter()
+              .append("path")
+              .attr("class", "land")
+              .attr("d", path)
+              .attr("clip-path", `url(#${clipPathId})`);
+
+            svg
+              .append("path")
+              .datum(graticule)
+              .attr("class", "graticule")
+              .attr("d", path)
+              .attr("clip-path", `url(#${clipPathId})`);
+
+            svg
+              .append("rect")
+              .attr("class", "overlay")
+              .attr("x", 0)
+              .attr("y", 0)
+              .attr("width", 350)
+              .attr("height", 200)
+              .attr("clip-path", `url(#${clipPathId})`);
+
+            const overlay = svg.select(".overlay");
+            svg
+              .append("text")
+              .attr("x", 175)
+              .attr("y", 100)
+              .attr("class", "projection-name")
+              .text(name)
+              .style("opacity", 0)
+              .style("text-anchor", "middle");
+          })
+          .catch((error) => {
+            console.error("Error loading JSON file:", error);
+          });
+
+        svg.on("mouseenter", () => {
+          svg.select(".projection-name").style("opacity", 1);
+        });
+
+        svg.on("mouseleave", () => {
+          svg.select(".projection-name").style("opacity", 0);
+        });
+      };
+
+      const grid = d3.select("#grid");
+      const projections = getRandomProjections(9);
+
+      projections.forEach(({ name, projection }, index) => {
+        const svg = grid.append("svg").attr("class", "map");
+        createMap(projection, svg, name);
+      });
+    </script>
+  </body>
+</html>

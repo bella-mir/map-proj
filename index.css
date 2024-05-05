@@ -1,0 +1,419 @@
+@import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Ephesis&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Stint+Ultra+Condensed&display=swap");
+
+/* Page */
+
+.root {
+  background-color: white;
+  font-family: "Poppins", "Arial", sans-serif;
+  color: #213547;
+}
+.page {
+  max-width: 1280px;
+  color: #2d4b73;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  align-items: center;
+  margin: 0 auto;
+}
+
+/* General */
+
+a {
+  text-decoration: none;
+  color: #f24194;
+  transition: background-color 0.3s ease;
+}
+
+a:hover {
+  color: #bf8d30;
+}
+
+body {
+  margin: 0;
+}
+
+/* Shared classes rules */
+
+.section__block {
+  display: flex;
+  flex-direction: column;
+  padding: 48px 11.6% 0 11.6%;
+  max-width: 984px;
+  margin: 0 auto;
+}
+
+.section__title {
+  font-weight: 600;
+  font-size: 24px;
+  color: #00a6a6;
+  margin-bottom: 2rem;
+}
+
+.page__content {
+  padding-top: 50px;
+  height: 100%;
+  min-height: calc(100vh - 80px);
+}
+
+/* Header */
+
+.header__wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(200, 200, 200, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.header {
+  width: 100%;
+  max-width: 984px;
+  opacity: 0.98;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.7% 11.6% 1% 11.6%;
+  min-height: 42px;
+  min-width: 288px;
+}
+
+.header__current {
+  font-weight: 600;
+}
+
+.header__logo {
+  background-image: url("asserts/geoPyLogo.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 30px;
+  width: 30px;
+  padding: 0;
+}
+
+.header__list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 2rem;
+}
+
+.header__nav li {
+  display: inline;
+}
+
+/* Footer Part */
+
+.footer__wrapper {
+  position: absolute;
+  width: 100vw;
+  overflow: hidden;
+  background-color: #f2f2f2;
+  margin-top: 50px;
+  left: 0;
+}
+
+.footer {
+  margin: 0 auto;
+  padding: 24px 5% 24px 5%;
+  max-width: 1184px;
+  width: 100%;
+  display: flex;
+  align-items: end;
+}
+
+.footer__copyright {
+  right: 0;
+  margin: 0;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 14px;
+  margin-left: auto;
+  color: gray;
+}
+
+/* Grid with maps and maps */
+
+#grid {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(3, 350px);
+  grid-template-rows: repeat(3, 200px);
+  grid-gap: 5px;
+}
+
+.map {
+  width: 350px;
+  height: 200px;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 20px;
+  width: 100%;
+  transition: transform 0.3s ease;
+}
+
+.overlay {
+  fill: #d8e3f2;
+  opacity: 0;
+}
+
+.map:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.map:hover .overlay {
+  opacity: 0.7;
+}
+
+.projection-name {
+  text-shadow: 1px 1px 2px #d8e3f2;
+  fill: #f26d3d;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.land {
+  fill: #677d99;
+  stroke-width: 0.5;
+}
+
+.water {
+  fill: #d8e3f2;
+}
+
+.graticule {
+  fill: none;
+  stroke: #91aac9;
+  stroke-width: 0.5;
+  stroke-opacity: 0.5;
+}
+
+/* Lead Part */
+
+.lead__title {
+  font-weight: 600;
+  color: #27528c;
+  font-size: 96px;
+  line-height: 100px;
+  text-align: center;
+  margin: 0 auto;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  word-spacing: 8px;
+  padding-top: 50px;
+}
+
+.lead__caption {
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 16px 16px 0 16px;
+  margin: 0;
+  text-align: right;
+  color: #f26d3d;
+}
+
+.lead__subtitle {
+  font-weight: normal;
+  font-size: 30px;
+  text-align: center;
+  margin: 32px auto;
+  color: #00a6a6;
+}
+
+/* Intro Quiz Part */
+
+.play__quiz {
+  font-size: 100px;
+  text-align: center;
+  width: 100%;
+}
+
+/* Other Pages */
+
+/* General */
+
+.page__title {
+  color: #00a6a6;
+  font-size: 50px;
+  margin-bottom: 0;
+}
+
+.section__title_2 {
+  color: #f26d3d;
+  font-weight: 600;
+  font-size: 24px;
+  margin-bottom: 2rem;
+}
+
+.section__subsection {
+  display: flex;
+  flex-direction: row;
+  gap: 80px;
+  margin-bottom: 20px;
+}
+
+.section__subsection__title {
+  color: #8c685b;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.section__row {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.section__column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.section__image__icon {
+  width: auto;
+  height: 20px;
+}
+
+.section__list {
+  list-style-type: none;
+  margin: 10px 0 0;
+  padding: 0;
+}
+
+.section__list__element {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.section__subsection__add {
+  font-size: 10px;
+}
+
+.section__row_part {
+  width: 100%;
+}
+
+.section__fullColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  height: 400px;
+  gap: 30px;
+}
+
+.section__text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* About Page */
+
+.author__image {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+}
+
+.author__separator {
+  color: lightgray;
+}
+
+/* Bonne Page */
+
+.bonne__image {
+  height: 470px;
+  width: auto;
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-inline-start: 0;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+}
+
+.legend-color {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.legend-water {
+  background-color: #27528c;
+}
+
+.legend-land {
+  background-color: #00a6a6;
+}
+
+.square {
+  width: 40px;
+  height: 40px;
+  border: 1px solid lightgray;
+  position: relative;
+  margin-right: 10px;
+}
+
+.lines-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.line {
+  position: absolute;
+  background-color: lightgray;
+}
+
+.horizontal {
+  width: 100%;
+  height: 1px;
+}
+
+.vertical {
+  width: 1px;
+  height: 100%;
+}
+
+.line:nth-child(1) {
+  top: calc(16.67% - 1px);
+}
+
+.line:nth-child(2) {
+  left: calc(16.67% - 1px);
+}
+
+.line:nth-child(3) {
+  top: calc(50% - 1px);
+}
+
+.line:nth-child(4) {
+  left: calc(50% - 1px);
+}
+
+.line:nth-child(5) {
+  top: calc(83.33% - 1px);
+}
+
+.line:nth-child(6) {
+  left: calc(83.33% - 1px);
+}
